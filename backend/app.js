@@ -3,6 +3,10 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const movieRoute = require('./api/routes/movie');
+const signUpRoute = require('./api/routes/signUp');
+const loginRoute = require('./api/routes/login');
+const premiumRoute = require('./api/routes/premium');
+const bookingRoute = require('./api/routes/booking');
 
 const app = express();
 
@@ -26,6 +30,10 @@ app.use((request, response, next) => {
 });
 
 app.use('/movie', movieRoute);
+app.use('/signup', signUpRoute);
+app.use('/login', loginRoute);
+app.use('/premium', premiumRoute);
+app.use('/booking', bookingRoute);
 
 app.use((request, response, next) => {
   const error = new Error('Not found API');

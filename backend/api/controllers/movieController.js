@@ -33,6 +33,57 @@ exports.addMovie = (request, response) => {
  * @param {Object} request
  * @param {Object} response
  *
+ * Update Movie
+ */
+exports.updateMovie = (request, response) => {
+  const updatedMovie = new Movie(request.body);
+
+  Movie.findByIdAndUpdate(request.body._id, updatedMovie, { new: true })
+    .exec()
+    .then((document) => {
+      console.log('Movie updated successfully', document);
+
+      response.status(200).json({
+        message: 'Movie updated successfully',
+      });
+    })
+    .catch((error) => {
+      console.error('Error updating movie:', error);
+
+      response.status(500).json({
+        message: 'Error updating movie',
+      });
+    });
+};
+
+/**
+ *
+ * @param {Object} request
+ * @param {Object} response
+ *
+ * Fetch Movie by id
+ */
+exports.fetchMovie = (request, response) => {
+  Movie.findById(request.params.movieId)
+    .then((movie) => {
+      console.log('Movie fetched successfully', movie);
+
+      response.status(200).json(movie);
+    })
+    .catch((error) => {
+      console.error('Error fetching movie:', error);
+
+      response.status(500).json({
+        message: 'Error fetching movie',
+      });
+    });
+};
+
+/**
+ *
+ * @param {Object} request
+ * @param {Object} response
+ *
  * Fetch Movies
  */
 exports.fetchMovies = (request, response) => {
@@ -45,15 +96,15 @@ exports.fetchMovies = (request, response) => {
 
   Movie.find(query)
     .then((movies) => {
-      console.log('Movie fetched successfully', movies);
+      console.log('Movies fetched successfully', movies);
 
       response.status(200).json(movies);
     })
     .catch((error) => {
-      console.error('Error fetching movie:', error);
+      console.error('Error fetching movies:', error);
 
       response.status(500).json({
-        message: 'Error fetching movie',
+        message: 'Error fetching movies',
       });
     });
 };
