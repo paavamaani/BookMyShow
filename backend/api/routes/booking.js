@@ -13,6 +13,12 @@ router.post('/', (request, response, next) => {
   bookingController.bookingMovie(request, response);
 });
 
+router.get('/fetchbookings', (request, response, next) => {
+  console.log('Route for fectch bookings', request);
+
+  bookingController.fetchBookings(request, response);
+});
+
 /**
  * Route for booked movies
  */

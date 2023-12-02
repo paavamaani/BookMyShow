@@ -33,6 +33,32 @@ exports.addMovie = (request, response) => {
  * @param {Object} request
  * @param {Object} response
  *
+ * Delete Movie
+ */
+exports.deleteMovie = (request, response) => {
+  console.log(request.params.movieId);
+  Movie.findOneAndDelete({ _id: request.params.movieId })
+    .then(() => {
+      console.log('Movie deleted successfully');
+
+      response.status(200).json({
+        message: 'Movie deleted successfully',
+      });
+    })
+    .catch((error) => {
+      console.error('Error deleting movie:', error);
+
+      response.status(500).json({
+        message: 'Error deleting movie',
+      });
+    });
+};
+
+/**
+ *
+ * @param {Object} request
+ * @param {Object} response
+ *
  * Update Movie
  */
 exports.updateMovie = (request, response) => {

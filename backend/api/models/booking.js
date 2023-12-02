@@ -1,15 +1,14 @@
 const mongoose = require('mongoose');
 
 const bookingSchema = new mongoose.Schema({
-  userId: {
-    type: mongoose.Types.ObjectId,
-    required: true,
-  },
+  userId: String,
   seat: String,
-  movie: String,
+  title: String,
+  language: String,
   theater: String,
   location: String,
-  time: String,
+  start_time: String,
+  end_time: String,
   screen: String,
   isRefunded: {
     type: Boolean,

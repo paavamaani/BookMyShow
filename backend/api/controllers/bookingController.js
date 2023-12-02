@@ -10,6 +10,7 @@ const Booking = require('../models/booking');
 exports.bookingMovie = (request, response) => {
   const newMovie = new Booking(request.body);
 
+  console.log(newMovie);
   newMovie
     .save()
     .then(() => {
@@ -40,9 +41,7 @@ exports.bookedMovies = (request, response) => {
     .then((movies) => {
       console.log('Movie fetched successfully', movies);
 
-      response.status(200).json({
-        message: 'Movie fetched successfully',
-      });
+      response.status(200).json(movies);
     })
     .catch((error) => {
       console.error('Error fetching movie:', error);
@@ -58,7 +57,7 @@ exports.bookedMovies = (request, response) => {
  * @param {Object} request
  * @param {Object} response
  *
- * Booked Movies
+ * Cancel Booking
  */
 exports.cancelBooking = (request, response) => {
   Booking.findOne({ _id: request.params.bookingId })
@@ -87,6 +86,27 @@ exports.cancelBooking = (request, response) => {
 
       response.status(500).json({
         message: 'Error cancelling movie',
+      });
+    });
+};
+
+/**
+ *
+ * @param {Object} request
+ * @param {Object} response
+ *
+ * Booked Movies
+ */
+exports.fetchBookings = (request, response) => {
+  Booking.find()
+    .then((bookings) => {
+      console.log('Fetch bookings', bookings);
+
+      response.status(201).json(bookings);
+    })
+    .catch((err) => {
+      response.status(500).json({
+        error: err,
       });
     });
 };

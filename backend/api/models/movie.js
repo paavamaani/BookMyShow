@@ -3,7 +3,9 @@ const mongoose = require('mongoose');
 const movieSchema = new mongoose.Schema({
   theater: String,
   title: String,
-  show: Array,
+  start_time: String,
+  end_time: String,
+  screen: Number,
   seating_capacity: Number,
   price: String,
   language: String,

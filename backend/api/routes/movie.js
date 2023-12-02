@@ -44,4 +44,13 @@ router.post('/updatemovie', (request, response, next) => {
   movieController.updateMovie(request, response);
 });
 
+/**
+ * Route for updating movie
+ */
+router.get('/deletemovie/:movieId', (request, response, next) => {
+  console.log('Route for delete movie', request.params);
+
+  movieController.deleteMovie(request, response);
+});
+
 module.exports = router;
